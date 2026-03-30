@@ -1,0 +1,56 @@
+# VoteOS Election Configuration — Example (Local Development)
+# Working example for a local dfx replica deployment.
+
+[election_authority]
+name = "Example Election Authority"
+slug = "example_authority"
+environment = "local"
+
+[network]
+ic_host = "http://127.0.0.1:4943"
+ic_network = "local"
+
+[canisters]
+user = "wwifi-ux777-77774-qaana-cai"
+wallet = "wrjd4-zp777-77774-qaanq-cai"
+identity = "v27v7-7x777-77774-qaaha-cai"
+admin2 = "u6s2n-gx777-77774-qaaba-cai"
+asset = "vizcg-th777-77774-qaaea-cai"
+governance = "vt46d-j7777-77774-qaagq-cai"
+
+[identity]
+pem_path = "../AxiaSystem-Rust-Bridge/identity.pem"
+bridge_principal = "cc72p-b2utp-tvutb-qsruk-4zjgw-5ig55-geerm-th27r-ibrlb-ko3ii-rqe"
+
+[api]
+bind_address = "127.0.0.1"
+bind_port = 3100
+
+[security]
+api_key = "dev-only-key-change-in-production"
+require_auth = false
+
+[rate_limit]
+requests_per_second = 100
+burst_size = 200
+
+[persistence]
+data_dir = "deploy/authorities/example_authority/data"
+enabled = true
+
+[modules]
+voter_registry = true
+election_management = true
+ballot_operations = true
+vote_recording = true
+tally_engine = true
+result_certification = true
+governance_proposals = true
+audit_oversight = true
+election_operations = true
+integration_export = true
+
+[operator]
+initial_admin_username = "election_admin"
+initial_admin_email = "admin@example-authority.gov"
+initial_admin_password = "changeme123"
