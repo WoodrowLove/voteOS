@@ -1,8 +1,9 @@
-# CivilOS Module Completion Standard
+# VoteOS Module Completion Standard
 
-> Defines what "done" means for a CivilOS module.
+> Defines what "done" means for a VoteOS module.
 > Every module must meet this standard before it can be declared complete.
-> Created: 2026-03-29
+> Created: 2026-03-29, adapted from CivilOS pattern
+> Realigned: 2026-03-30
 
 ---
 
@@ -18,7 +19,7 @@ A module is complete when all 6 layers are satisfied.
 | Module actors | Which actors from ACTOR_MAP participate, with their roles |
 | Module capabilities | Complete list of capabilities the module owns |
 | Module workflows | Which workflows are dedicated vs engine-driven |
-| Ownership boundary | What CivilOS owns vs what AxiaSystem provides |
+| Ownership boundary | What VoteOS owns vs what AxiaSystem provides |
 
 ### Layer 2: Resolution
 
@@ -27,7 +28,7 @@ A module is complete when all 6 layers are satisfied.
 | Capability classification | Every capability classified: ORCHESTRATION_READY, DOMAIN_EXTENSION_NEEDED, or SYSTEM_PRIMITIVE_NEEDED |
 | AxiaSystem gaps identified | Any missing Axia primitives documented |
 | Bridge gaps identified | Any missing bridge exposures documented |
-| Domain state needs identified | What CivilOS-local state management is required |
+| Domain state needs identified | What VoteOS-local state management is required |
 
 ### Layer 3: Build
 
@@ -113,11 +114,20 @@ All testing must follow the codified workflow-proof discipline:
 
 | Module | Status | Evidence |
 |--------|--------|---------|
-| 1. Identity & Administration | IN_BUILD | 3 workflows proven, DepartmentRegistry exists, 13 capabilities engine-only |
-| 2. DMV & Licensing | IN_BUILD | 2 workflows proven, 8 capabilities engine-only, no domain state for lifecycle |
-| 3. Permits & Compliance | IN_BUILD | 4 workflows proven, 2 registries exist, 5 capabilities engine-only |
-| 4. Finance & Treasury | IN_BUILD | 1 workflow proven (full 4-step including transfer), 9 capabilities engine-only |
-| 5. Public Safety & Enforcement | IN_BUILD | 1 workflow proven, CaseRegistry exists, 8 capabilities engine-only |
-| 6. Assets & Records | NOT_STARTED | 0 dedicated workflows, all 9 engine-registered |
-| 7. Governance | IN_BUILD | 1 workflow proven (with role grant), 6 capabilities engine-only |
-| 8. Citizen Services & Oversight | IN_BUILD | 2 workflows proven, NotificationRegistry exists, 11 engine-only |
+| 1. Voter Registry | DOMAIN_PROVEN | 11 domain tests passing, 5 DomainStore instances, 4 workflow files written |
+| 2. Election Management | DOMAIN_PROVEN | 13 domain tests passing, 3 DomainStore instances, state machine proven |
+| 3. Ballot Operations | DOMAIN_PROVEN | 12 domain tests passing, SHA-256 integrity hash proven |
+| 4. Vote Recording | DOMAIN_PROVEN | 12 domain tests passing, secrecy architecture proven, double-vote prevention proven |
+| 5. Tally Engine | DESIGN_COMPLETE | Capability map defined, no implementation |
+| 6. Result Certification | DESIGN_COMPLETE | Capability map defined, no implementation |
+| 7. Governance Proposals | DESIGN_COMPLETE | Capability map defined, no implementation |
+| 8. Audit & Oversight | DESIGN_COMPLETE | Capability map defined, no implementation |
+| 9. Election Operations | DESIGN_COMPLETE | Capability map defined, no implementation |
+| 10. Integration & Export | DESIGN_COMPLETE | Capability map defined, no implementation |
+
+### Note on DOMAIN_PROVEN vs CONDITIONALLY_COMPLETE
+Modules 1-4 were previously labeled CONDITIONALLY_COMPLETE. After ground-truth audit (2026-03-30), they are re-labeled DOMAIN_PROVEN because:
+- All tests are domain-level only (in-memory DomainStore, no AxiaSystem)
+- No failure-path tests exist
+- No integration tests are proven
+- CONDITIONALLY_COMPLETE requires all 6 layers addressed; Layer 4 (failure paths) and Layer 5 (operations) are incomplete

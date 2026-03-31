@@ -33,9 +33,16 @@ System intent:        docs/voteos-design/SYSTEM_INTENT.md
 Mission/boundaries:   docs/voteos-design/MISSION_AND_BOUNDARIES.md
 Module registry:      docs/voteos-design/MODULE_REGISTRY.md
 Capability map:       docs/voteos-design/CAPABILITY_MAP.md
-Build sequence:       docs/voteos-design/MODULE_SEQUENCE_PLAN.md
+Build sequence:       docs/voteos-design/NEXT_BUILD_ORDER.md (corrected 2026-03-30)
+Original sequence:    docs/voteos-design/MODULE_SEQUENCE_PLAN.md (original, superseded by above)
 Completion standard:  docs/voteos-design/VOTEOS_COMPLETION_STANDARD.md
 Interop hooks:        docs/voteos-design/INTEROPERABILITY_HOOKS.md
+
+## Realignment documents (2026-03-30)
+Ground truth:         docs/voteos-design/GROUND_TRUTH_STATUS.md
+Trust core:           docs/voteos-design/TRUST_CORE_DEFINITION.md
+Corrected build plan: docs/voteos-design/NEXT_BUILD_ORDER.md
+Adoption stance:      docs/voteos-design/ADOPTION_AND_MIGRATION_STANCE.md
 
 ## Session documents
 Session state:        SESSION_STATE.md
@@ -60,7 +67,7 @@ Rust Bridge:
 VoteOS:
   build:   cargo build
   test:    cargo test
-  run:     cargo run --bin voteos_server -- config/election.example.toml
+  run:     (no binary target yet — library crate only, see NEXT_BUILD_ORDER.md Wave 6)
 
 ## Canister IDs (local replica — from CivilOS deployment, SHARED)
 Last known IDs (verify with dfx canister id <name> in ../AxiaSystem):
@@ -74,30 +81,33 @@ governance: vt46d-j7777-77774-qaagq-cai
 Note: IDs change on every dfx start --clean. Verify before use.
 
 ## Build state
-Current phase:         VoteOS Phase 1 — Waves 1-2 COMPLETE
-Last completed gate:   Wave 2 (Ballot Operations + Vote Recording)
-Current state:         4 modules built (47 capabilities), 54 tests passing, ready for Wave 3
+Current phase:         VoteOS Phase 1 — Waves 1-3.5 BUILD_COMPLETE, Trust Gate PASSED
+Last completed gate:   Wave 3.5 (End-to-End Domain Proof — trust gate passed, 15 cross-module tests)
+Current state:         6 modules BUILD_COMPLETE (64 capabilities), 103 domain tests passing, 11 ignored (empty stubs), no integration tests, no API, no binary
+Ground truth:          docs/voteos-design/GROUND_TRUTH_STATUS.md (2026-03-30 audit)
 
 ## Module status (update as you build)
 | # | Module | Status |
 |---|--------|--------|
-| 1 | Voter Registry | CONDITIONALLY_COMPLETE |
-| 2 | Election Management | CONDITIONALLY_COMPLETE |
-| 3 | Ballot Operations | CONDITIONALLY_COMPLETE |
-| 4 | Vote Recording | CONDITIONALLY_COMPLETE |
-| 5 | Tally Engine | DESIGN_COMPLETE |
-| 6 | Result Certification | DESIGN_COMPLETE |
+| 1 | Voter Registry | BUILD_COMPLETE |
+| 2 | Election Management | BUILD_COMPLETE |
+| 3 | Ballot Operations | BUILD_COMPLETE |
+| 4 | Vote Recording | BUILD_COMPLETE |
+| 5 | Tally Engine | BUILD_COMPLETE |
+| 6 | Result Certification | BUILD_COMPLETE |
 | 7 | Governance Proposals | DESIGN_COMPLETE |
 | 8 | Audit & Oversight | DESIGN_COMPLETE |
 | 9 | Election Operations | DESIGN_COMPLETE |
 | 10 | Integration & Export | DESIGN_COMPLETE |
 
-## Wave execution order
-Wave 1: Voter Registry + Election Management (foundation)
-Wave 2: Ballot Operations + Vote Recording (core action)
-Wave 3: Tally Engine + Result Certification (results)
-Wave 4: Governance Proposals + Audit (trust layer)
-Wave 5: Election Operations + Integration (deployment)
+## Wave execution order (corrected 2026-03-30)
+Wave 1: Voter Registry + Election Management (foundation) — BUILD_COMPLETE
+Wave 2: Ballot Operations + Vote Recording (core action) — BUILD_COMPLETE
+Wave 3: Tally Engine + Result Certification (results) — BUILD_COMPLETE
+Wave 3.5: End-to-end domain proof (trust gate) — PASSED
+Wave 4: Audit & Oversight (trust verification — promoted to solo wave)
+Wave 5: Governance Proposals + Integration & Export (extensions)
+Wave 6: Election Operations + API + Deployment (runtime boundary)
 
 ## Architecture stance
 - AxiaSystem = source of identity, legitimacy, assurance truth
@@ -108,10 +118,14 @@ Wave 5: Election Operations + Integration (deployment)
 - VoteOS is NEUTRAL — it never chooses outcomes
 
 ## Open questions
-NONE — ready for Wave 1 execution
+
+- Runtime shape: VoteOS has no binary target or HTTP API yet (Wave 6 will address)
 
 ## Known blockers
-NONE — ready for Wave 1 execution
+
+- No binary target — VoteOS is library-only until Wave 6
+- No AxiaSystem integration tests — requires local ICP replica
+- 7 workflow test stubs are empty bodies, not blocked tests with real logic
 
 ## Iteration protocol
 Follow docs/agent/ITERATION_HARNESS.md for the build loop.

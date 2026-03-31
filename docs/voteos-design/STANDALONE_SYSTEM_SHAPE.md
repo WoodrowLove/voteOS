@@ -39,6 +39,7 @@
 │                                                               │
 │  ┌────────────────────────────────────────────────────────┐  │
 │  │     HTTP API (REST endpoints for all modules)           │  │
+│  │     ⚠ ASPIRATIONAL — not yet implemented               │  │
 │  └────────────────────────────────────────────────────────┘  │
 │                                                               │
 │  ┌────────────────────────────────────────────────────────┐  │
@@ -170,6 +171,6 @@ A certified result is:
 | Result computation | VoteOS tally engine |
 | Certification | VoteOS certification module |
 | Audit trail | VoteOS audit module |
-| API | VoteOS HTTP API (own server, own port) |
+| API | VoteOS HTTP API (own server, own port) — **ASPIRATIONAL: not yet implemented** |
 
 VoteOS is a complete system. CivilOS is optional context, not a requirement.

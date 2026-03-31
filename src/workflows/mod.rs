@@ -8,3 +8,5 @@ pub mod election_officials;
 pub mod election_config;
 pub mod ballot_operations;
 pub mod vote_recording;
+pub mod tally_engine;
+pub mod result_certification;

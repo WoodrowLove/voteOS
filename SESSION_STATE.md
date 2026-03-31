@@ -1,66 +1,79 @@
 # VoteOS Session State
 
 ## Current Phase
-Phase 1 — Wave 1 COMPLETE, Wave 2 COMPLETE
+
+Phase 1 — Waves 1-3.5 BUILD_COMPLETE | Trust Gate PASSED | Wave 4 (Audit) NEXT
 
 ## Last Completed Gate
-Wave 2 Core Action: Ballot Operations + Vote Recording built, tested, passing
+
+Wave 3.5: End-to-End Domain Proof — 15 cross-module lifecycle tests proving the trust core works as a coherent system.
 
 ## Current State
+
 - Infrastructure: SpineClient, DomainStore, WorkflowError, Persistence — all operational
-- Module 1 (Voter Registry): 12 capabilities, 11 domain tests passing
-- Module 2 (Election Management): 14 capabilities, 13 domain tests passing
-- Module 3 (Ballot Operations): 10 capabilities, 12 domain tests passing
-- Module 4 (Vote Recording): 11 capabilities, 12 domain tests passing
-- 6 DomainStore unit tests passing
-- 7 workflow integration tests marked BLOCKED (require ICP replica)
-- Total: 54 passing, 0 failing, 7 ignored
+- Module 1 (Voter Registry): 12 capabilities, 11 domain tests
+- Module 2 (Election Management): 14 capabilities, 13 domain tests
+- Module 3 (Ballot Operations): 10 capabilities, 12 domain tests
+- Module 4 (Vote Recording): 11 capabilities, 12 domain tests
+- Module 5 (Tally Engine): 9 capabilities, 22 domain tests
+- Module 6 (Result Certification): 8 capabilities, 12 domain tests
+- End-to-end lifecycle: 15 cross-module tests (happy path, failure, ambiguity, determinism, consistency)
+- 6 DomainStore unit tests
+- Total: 103 passing, 0 failing, 11 ignored (empty stubs)
 
-## Wave 1 Gate Assessment
-- [x] Voter eligibility verified against AxiaSystem
-- [x] Election lifecycle state machine working (DRAFT → CERTIFIED)
-- [x] At least one election type configurable
+## Trust Gate Result: PASSED
 
-## Wave 2 Gate Assessment
-- [x] Ballot template with items created and issued
-- [x] Vote recorded securely
-- [x] Double-vote prevention proven (has_voted + participation tracking)
-- [x] Ballot secrecy enforced in secret ballot mode (content/identity separation)
+The VoteOS trust core (Modules 1-6) has been validated as a coherent system at domain level.
+
+Proven behaviors:
+- Full lifecycle: create → register → ballot → vote → close → tally → certify
+- Ineligible voter blocked (suspended registration not counted)
+- Double voting blocked (has_voted precondition)
+- Premature certification blocked (Open → Tallied/Certified forbidden)
+- Premature tally blocked (Open → Tallied forbidden)
+- Post-certification immutability (all 6 transitions blocked)
+- State machine discipline (all invalid transitions rejected)
+- Tie blocks certification (Ambiguous tally → workflow rejects)
+- No votes blocks certification (Invalid tally → workflow rejects)
+- Mixed ambiguity blocks certification (one tied item → entire tally Ambiguous)
+- Determinism: identical runs produce identical results
+- Determinism: shuffled voter order produces identical tally
+- Cross-module consistency: registrations = issuances = participation = sealed = tally count
+- Ballot secrecy maintained across all modules
+- Certification snapshot matches live tally
+- Single voter election certifies correctly
+- Cancelled election terminates (no further transitions)
 
 ## Next Action
-Wave 3+ available — Tally Engine + Result Certification (not in scope for this session)
+
+**Wave 4: Audit & Oversight (Module 8)**
 
 ## Module Status
+
 | Module | Status |
 |--------|--------|
-| 1. Voter Registry | CONDITIONALLY_COMPLETE |
-| 2. Election Management | CONDITIONALLY_COMPLETE |
-| 3. Ballot Operations | CONDITIONALLY_COMPLETE |
-| 4. Vote Recording | CONDITIONALLY_COMPLETE |
-| 5. Tally Engine | DESIGN_COMPLETE |
-| 6. Result Certification | DESIGN_COMPLETE |
+| 1. Voter Registry | BUILD_COMPLETE |
+| 2. Election Management | BUILD_COMPLETE |
+| 3. Ballot Operations | BUILD_COMPLETE |
+| 4. Vote Recording | BUILD_COMPLETE |
+| 5. Tally Engine | BUILD_COMPLETE |
+| 6. Result Certification | BUILD_COMPLETE |
 | 7. Governance Proposals | DESIGN_COMPLETE |
 | 8. Audit & Oversight | DESIGN_COMPLETE |
 | 9. Election Operations | DESIGN_COMPLETE |
 | 10. Integration & Export | DESIGN_COMPLETE |
 
-## Test Classification
-| Test | Classification |
-|------|---------------|
-| Domain store tests (6) | STRICT_HAPPY_PATH_PROVEN |
-| Voter registry domain tests (11) | STRICT_HAPPY_PATH_PROVEN |
-| Election management domain tests (13) | STRICT_HAPPY_PATH_PROVEN |
-| Ballot operations domain tests (12) | STRICT_HAPPY_PATH_PROVEN |
-| Vote recording domain tests (12) | STRICT_HAPPY_PATH_PROVEN |
-| Workflow integration tests (7) | STRICT_HAPPY_PATH_BLOCKED (requires ICP replica) |
-
 ## Election-Specific Proofs
+
 | Proof | Status |
 |-------|--------|
-| ELIGIBILITY_PROVEN | Domain-level: is_registered, voters_for_election |
-| BALLOT_INTEGRITY_PROVEN | SHA-256 hash computed and verified in tests |
-| DOUBLE_VOTE_PREVENTION_PROVEN | has_voted check proven in domain tests |
-| SECRECY_PROVEN | VoteRecord/VoteContent separation + verify_ballot_secrecy |
-| TALLY_DETERMINISM_PROVEN | Pending (Wave 3) |
-| CERTIFICATION_CHAIN_PROVEN | Pending (Wave 3) |
-| AUDIT_RECONSTRUCTION_PROVEN | Pending (Wave 4) |
+| ELIGIBILITY_PROVEN | DOMAIN_PROVEN |
+| BALLOT_INTEGRITY_PROVEN | DOMAIN_PROVEN |
+| DOUBLE_VOTE_PREVENTION_PROVEN | DOMAIN_PROVEN |
+| SECRECY_PROVEN | DOMAIN_PROVEN (structural) |
+| TALLY_DETERMINISM_PROVEN | DOMAIN_PROVEN (4 determinism tests + 2 system-level) |
+| AMBIGUITY_HANDLED_PROVEN | DOMAIN_PROVEN (3 ambiguity tests) |
+| CERTIFICATION_CHAIN_PROVEN | DOMAIN_PROVEN (full lifecycle + 5 failure tests) |
+| END_TO_END_LIFECYCLE_PROVEN | DOMAIN_PROVEN (15 cross-module tests) |
+| SYSTEM_CONSISTENCY_PROVEN | DOMAIN_PROVEN (7 consistency checks) |
+| AUDIT_RECONSTRUCTION_PROVEN | NOT_STARTED (Wave 4) |
