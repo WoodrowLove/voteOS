@@ -6,5 +6,7 @@ pub mod votes;
 pub mod tally;
 pub mod certification;
 pub mod audit;
+pub mod proposals;
+pub mod export;
 
 pub use store::DomainStore;

@@ -81,9 +81,9 @@ governance: vt46d-j7777-77774-qaagq-cai
 Note: IDs change on every dfx start --clean. Verify before use.
 
 ## Build state
-Current phase:         VoteOS Phase 1 — Waves 1-4 BUILD_COMPLETE, Trust Core FULLY PROVEN
-Last completed gate:   Wave 4 (Audit & Oversight — reconstruction, tamper detection, observer verification)
-Current state:         7 modules BUILD_COMPLETE (74 capabilities), 117 domain tests passing, 13 ignored (empty stubs), no integration tests, no API, no binary
+Current phase:         VoteOS Phase 1 — Waves 1-5 BUILD_COMPLETE, 9/10 modules addressed
+Last completed gate:   Wave 5 (Governance Proposals + Integration & Export)
+Current state:         9 modules BUILD_COMPLETE (100 capabilities), 137 domain tests passing, 17 ignored (empty stubs), no integration tests, no API, no binary
 Ground truth:          docs/voteos-design/GROUND_TRUTH_STATUS.md (2026-03-30 audit)
 
 ## Module status (update as you build)
@@ -95,10 +95,10 @@ Ground truth:          docs/voteos-design/GROUND_TRUTH_STATUS.md (2026-03-30 aud
 | 4 | Vote Recording | BUILD_COMPLETE |
 | 5 | Tally Engine | BUILD_COMPLETE |
 | 6 | Result Certification | BUILD_COMPLETE |
-| 7 | Governance Proposals | DESIGN_COMPLETE |
+| 7 | Governance Proposals | BUILD_COMPLETE |
 | 8 | Audit & Oversight | BUILD_COMPLETE |
 | 9 | Election Operations | DESIGN_COMPLETE |
-| 10 | Integration & Export | DESIGN_COMPLETE |
+| 10 | Integration & Export | BUILD_COMPLETE |
 
 ## Wave execution order (corrected 2026-03-30)
 Wave 1: Voter Registry + Election Management (foundation) — BUILD_COMPLETE
@@ -106,7 +106,7 @@ Wave 2: Ballot Operations + Vote Recording (core action) — BUILD_COMPLETE
 Wave 3: Tally Engine + Result Certification (results) — BUILD_COMPLETE
 Wave 3.5: End-to-end domain proof (trust gate) — PASSED
 Wave 4: Audit & Oversight (trust verification — promoted to solo wave) — BUILD_COMPLETE
-Wave 5: Governance Proposals + Integration & Export (extensions)
+Wave 5: Governance Proposals + Integration & Export (extensions) — BUILD_COMPLETE
 Wave 6: Election Operations + API + Deployment (runtime boundary)
 
 ## Architecture stance

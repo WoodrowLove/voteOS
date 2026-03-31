@@ -11,3 +11,5 @@ pub mod vote_recording;
 pub mod tally_engine;
 pub mod result_certification;
 pub mod audit_oversight;
+pub mod governance_proposals;
+pub mod integration_export;
