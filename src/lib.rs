@@ -10,9 +10,8 @@
 //! Both depend on AxiaSystem. Neither depends on the other.
 //! When deployed together, citizens carry identity between systems.
 
-// Modules will be added during implementation phases
-// pub mod spine;
-// pub mod domain;
-// pub mod workflows;
-// pub mod api;
-// pub mod persistence;
+pub mod persistence;
+pub mod spine;
+pub mod domain;
+pub mod workflows;
+pub mod error;
