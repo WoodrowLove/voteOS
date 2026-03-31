@@ -6,3 +6,5 @@ pub mod create_election;
 pub mod election_lifecycle;
 pub mod election_officials;
 pub mod election_config;
+pub mod ballot_operations;
+pub mod vote_recording;

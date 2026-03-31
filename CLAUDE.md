@@ -74,17 +74,17 @@ governance: vt46d-j7777-77774-qaagq-cai
 Note: IDs change on every dfx start --clean. Verify before use.
 
 ## Build state
-Current phase:         VoteOS Phase 1 — Foundation Build (Wave 1)
-Last completed gate:   System Planning Wave complete
-Current state:         10 modules designed, 100 capabilities mapped, ready for Wave 1
+Current phase:         VoteOS Phase 1 — Waves 1-2 COMPLETE
+Last completed gate:   Wave 2 (Ballot Operations + Vote Recording)
+Current state:         4 modules built (47 capabilities), 54 tests passing, ready for Wave 3
 
 ## Module status (update as you build)
 | # | Module | Status |
 |---|--------|--------|
-| 1 | Voter Registry | DESIGN_COMPLETE |
-| 2 | Election Management | DESIGN_COMPLETE |
-| 3 | Ballot Operations | DESIGN_COMPLETE |
-| 4 | Vote Recording | DESIGN_COMPLETE |
+| 1 | Voter Registry | CONDITIONALLY_COMPLETE |
+| 2 | Election Management | CONDITIONALLY_COMPLETE |
+| 3 | Ballot Operations | CONDITIONALLY_COMPLETE |
+| 4 | Vote Recording | CONDITIONALLY_COMPLETE |
 | 5 | Tally Engine | DESIGN_COMPLETE |
 | 6 | Result Certification | DESIGN_COMPLETE |
 | 7 | Governance Proposals | DESIGN_COMPLETE |
