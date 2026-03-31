@@ -2,11 +2,11 @@
 
 ## Current Phase
 
-Phase 1 — Waves 1-3.5 BUILD_COMPLETE | Trust Gate PASSED | Wave 4 (Audit) NEXT
+Phase 1 — Waves 1-4 BUILD_COMPLETE | Trust Core FULLY PROVEN at domain level
 
 ## Last Completed Gate
 
-Wave 3.5: End-to-End Domain Proof — 15 cross-module lifecycle tests proving the trust core works as a coherent system.
+Wave 4: Audit & Oversight (Module 8) — audit reconstruction, tamper detection, observer verification, contest linkage. 14 new domain tests.
 
 ## Current State
 
@@ -17,36 +17,18 @@ Wave 3.5: End-to-End Domain Proof — 15 cross-module lifecycle tests proving th
 - Module 4 (Vote Recording): 11 capabilities, 12 domain tests
 - Module 5 (Tally Engine): 9 capabilities, 22 domain tests
 - Module 6 (Result Certification): 8 capabilities, 12 domain tests
-- End-to-end lifecycle: 15 cross-module tests (happy path, failure, ambiguity, determinism, consistency)
+- Module 8 (Audit & Oversight): 10 capabilities, 14 domain tests
+- End-to-end lifecycle: 15 cross-module tests
 - 6 DomainStore unit tests
-- Total: 103 passing, 0 failing, 11 ignored (empty stubs)
+- Total: 117 passing, 0 failing, 13 ignored (empty stubs)
 
-## Trust Gate Result: PASSED
+## Trust Core: FULLY PROVEN AT DOMAIN LEVEL
 
-The VoteOS trust core (Modules 1-6) has been validated as a coherent system at domain level.
-
-Proven behaviors:
-- Full lifecycle: create → register → ballot → vote → close → tally → certify
-- Ineligible voter blocked (suspended registration not counted)
-- Double voting blocked (has_voted precondition)
-- Premature certification blocked (Open → Tallied/Certified forbidden)
-- Premature tally blocked (Open → Tallied forbidden)
-- Post-certification immutability (all 6 transitions blocked)
-- State machine discipline (all invalid transitions rejected)
-- Tie blocks certification (Ambiguous tally → workflow rejects)
-- No votes blocks certification (Invalid tally → workflow rejects)
-- Mixed ambiguity blocks certification (one tied item → entire tally Ambiguous)
-- Determinism: identical runs produce identical results
-- Determinism: shuffled voter order produces identical tally
-- Cross-module consistency: registrations = issuances = participation = sealed = tally count
-- Ballot secrecy maintained across all modules
-- Certification snapshot matches live tally
-- Single voter election certifies correctly
-- Cancelled election terminates (no further transitions)
+All 7 trust core modules (1-6 + 8) are BUILD_COMPLETE. All 10 proofs demonstrated.
 
 ## Next Action
 
-**Wave 4: Audit & Oversight (Module 8)**
+**Wave 5: Governance Proposals (Module 7) + Integration & Export (Module 10)**
 
 ## Module Status
 
@@ -59,7 +41,7 @@ Proven behaviors:
 | 5. Tally Engine | BUILD_COMPLETE |
 | 6. Result Certification | BUILD_COMPLETE |
 | 7. Governance Proposals | DESIGN_COMPLETE |
-| 8. Audit & Oversight | DESIGN_COMPLETE |
+| 8. Audit & Oversight | BUILD_COMPLETE |
 | 9. Election Operations | DESIGN_COMPLETE |
 | 10. Integration & Export | DESIGN_COMPLETE |
 
@@ -71,9 +53,11 @@ Proven behaviors:
 | BALLOT_INTEGRITY_PROVEN | DOMAIN_PROVEN |
 | DOUBLE_VOTE_PREVENTION_PROVEN | DOMAIN_PROVEN |
 | SECRECY_PROVEN | DOMAIN_PROVEN (structural) |
-| TALLY_DETERMINISM_PROVEN | DOMAIN_PROVEN (4 determinism tests + 2 system-level) |
-| AMBIGUITY_HANDLED_PROVEN | DOMAIN_PROVEN (3 ambiguity tests) |
-| CERTIFICATION_CHAIN_PROVEN | DOMAIN_PROVEN (full lifecycle + 5 failure tests) |
-| END_TO_END_LIFECYCLE_PROVEN | DOMAIN_PROVEN (15 cross-module tests) |
-| SYSTEM_CONSISTENCY_PROVEN | DOMAIN_PROVEN (7 consistency checks) |
-| AUDIT_RECONSTRUCTION_PROVEN | NOT_STARTED (Wave 4) |
+| TALLY_DETERMINISM_PROVEN | DOMAIN_PROVEN |
+| AMBIGUITY_HANDLED_PROVEN | DOMAIN_PROVEN |
+| CERTIFICATION_CHAIN_PROVEN | DOMAIN_PROVEN |
+| END_TO_END_LIFECYCLE_PROVEN | DOMAIN_PROVEN |
+| SYSTEM_CONSISTENCY_PROVEN | DOMAIN_PROVEN |
+| AUDIT_RECONSTRUCTION_PROVEN | DOMAIN_PROVEN (4 tamper tests, reconstruction, secrecy, contest linkage) |
+| OBSERVER_VERIFICATION_PROVEN | DOMAIN_PROVEN (read-only independent verification) |
+| TAMPER_DETECTION_PROVEN | DOMAIN_PROVEN (tally, hash, count, missing/phantom votes) |

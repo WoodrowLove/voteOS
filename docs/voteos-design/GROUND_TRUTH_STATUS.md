@@ -94,7 +94,7 @@ Domain-level election proofs demonstrated:
 | 5. Tally Engine | BUILD_COMPLETE | 9 capabilities, 22 domain tests (4 determinism, 4 ambiguity, 3 threshold, 3 registry, 2 edge, 6 happy path). Pure computation with BTreeMap for ordering determinism. |
 | 6. Result Certification | BUILD_COMPLETE | 8 capabilities, 12 domain tests (1 full lifecycle, 3 immutability failure, 2 contest, 2 precondition failure, 2 registry, 1 persistence). Tally snapshot frozen at certification. |
 | 7. Governance Proposals | DESIGN_COMPLETE | 10 capabilities defined. No code. |
-| 8. Audit & Oversight | DESIGN_COMPLETE | 10 capabilities defined. Per-module audit logs exist but no cross-module audit system. |
+| 8. Audit & Oversight | BUILD_COMPLETE | 10 capabilities, 14 domain tests. Audit reconstruction, tamper detection (tally/hash/count/missing/phantom), observer verification, contest linkage, secrecy preservation. |
 | 9. Election Operations | DESIGN_COMPLETE | 8 capabilities defined. No code. |
 | 10. Integration & Export | DESIGN_COMPLETE | 8 capabilities defined. No code. |
 
@@ -143,7 +143,7 @@ Domain-level election proofs demonstrated:
 2. No AxiaSystem integration proof at any level
 3. ~~No tally engine~~ — RESOLVED: Tally Engine implemented (Wave 3)
 4. ~~No result certification~~ — RESOLVED: Result Certification implemented (Wave 3)
-5. No cross-module audit system (per-module logs exist, but no reconstruction)
+5. ~~No cross-module audit system~~ — RESOLVED: Audit & Oversight implemented (Wave 4)
 6. No adoption/migration layer
 7. ~~No end-to-end lifecycle test~~ — RESOLVED: test_full_lifecycle_create_to_certify (Wave 3)
 
@@ -160,7 +160,7 @@ Domain-level election proofs demonstrated:
 | 5 | Tally Engine | DESIGN_COMPLETE | BUILD_COMPLETE (Wave 3) |
 | 6 | Result Certification | DESIGN_COMPLETE | BUILD_COMPLETE (Wave 3) |
 | 7 | Governance Proposals | DESIGN_COMPLETE | DESIGN_COMPLETE |
-| 8 | Audit & Oversight | DESIGN_COMPLETE | DESIGN_COMPLETE |
+| 8 | Audit & Oversight | DESIGN_COMPLETE | BUILD_COMPLETE (Wave 4) |
 | 9 | Election Operations | DESIGN_COMPLETE | DESIGN_COMPLETE |
 | 10 | Integration & Export | DESIGN_COMPLETE | DESIGN_COMPLETE |
 
