@@ -15,3 +15,4 @@ pub mod spine;
 pub mod domain;
 pub mod workflows;
 pub mod error;
+pub mod adoption;

@@ -2,19 +2,19 @@
 
 ## Current Phase
 
-Phase 1 — All 10 modules BUILD_COMPLETE | Runtime boundary OPERATIONAL
+Phase 1 COMPLETE — All 10 modules + Adoption Layer BUILD_COMPLETE
 
 ## Last Completed Gate
 
-Wave 6: Election Operations (Module 9) + Runtime Boundary — axum HTTP server, API endpoints, config-driven startup, operational controls.
+Wave 7: Adoption Layer — legacy ingestion, normalization, identity reconciliation, shadow validation.
 
 ## Current State
 
 - All 10 modules BUILD_COMPLETE (100+ capabilities)
-- Binary target: `cargo run -- config/voteos.toml`
-- HTTP API: axum server with 20+ endpoints
-- 150 domain tests passing, 0 failing, 17 ignored (empty stubs)
-- Runtime: config-driven, persistence-optional, API-key auth
+- Adoption layer BUILD_COMPLETE (legacy migration + shadow mode)
+- Binary: `cargo run -- config/voteos.toml`
+- HTTP API: 20+ endpoints
+- Total: 173 passing, 0 failing, 17 ignored (empty stubs)
 
 ## Module Status
 
@@ -30,34 +30,22 @@ Wave 6: Election Operations (Module 9) + Runtime Boundary — axum HTTP server, 
 | 8. Audit & Oversight | BUILD_COMPLETE | 14 |
 | 9. Election Operations | BUILD_COMPLETE | 13 |
 | 10. Integration & Export | BUILD_COMPLETE | 8 |
+| Adoption Layer | BUILD_COMPLETE | 23 |
 | Cross-module lifecycle | PROVEN | 15 |
 | DomainStore unit | PROVEN | 6 |
 
-## Runtime Boundary
+## Adoption Layer Components
 
 | Component | Status |
 |-----------|--------|
-| Binary entrypoint (main.rs) | OPERATIONAL |
-| HTTP server (axum) | OPERATIONAL |
-| Config (voteos.toml) | OPERATIONAL |
-| API key auth | OPERATIONAL |
-| Health/Ready/Status | OPERATIONAL |
-| Election lifecycle API | OPERATIONAL |
-| Tally/Certification API | OPERATIONAL |
-| Audit/Export API | OPERATIONAL |
-| Operations API | OPERATIONAL |
-| Persistence (JSON files) | OPERATIONAL |
-
-## API Endpoints
-
-Health: GET /health, /ready, /status
-Elections: POST /api/elections/create, GET /api/elections, /:id, /:id/publish, /open, /close
-Tally: POST /api/tally/:id/compute, GET /api/tally/:id
-Certification: POST /api/certify/:id
-Audit: GET /api/audit/:id, POST /api/audit/:id/verify
-Export: GET /api/export/:id
-Operations: POST /api/operations/:id/pause, /resume, /incident, GET /state
+| Legacy record types (voter, election, official) | IMPLEMENTED |
+| JSON adapter (file-based ingestion) | IMPLEMENTED |
+| Schema normalizer (Normalized/Incomplete/Invalid/Conflict/Unsupported) | IMPLEMENTED |
+| Identity reconciler (Matched/Ambiguous/Missing/Invalid) | IMPLEMENTED |
+| Shadow validator (Match/SemanticEquivalent/TrueMismatch/LegacyDataIncomplete) | IMPLEMENTED |
+| Full pipeline test (ingest → normalize → reconcile → shadow validate) | PROVEN |
+| Cutover controller | PLANNED (future wave) |
 
 ## Next Action
 
-**Wave 7: Adoption Layer (Wrapper / Migration / Shadow Mode)** — or runtime hardening + AxiaSystem integration
+**Runtime hardening, AxiaSystem live integration, or pilot preparation**
