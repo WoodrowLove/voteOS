@@ -1,0 +1,7 @@
+target/
+.git/
+.claude/
+*.md
+docs/
+tests/
+.mcp.json

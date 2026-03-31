@@ -1,0 +1,21 @@
+# VoteOS — Development Configuration
+# Use this for local development and testing.
+# Auth is DISABLED. Data persists to ./data/.
+
+[api]
+# Address to bind the HTTP server
+bind_address = "127.0.0.1"
+# Port for the HTTP API
+bind_port = 3100
+
+[security]
+# API key for authenticated requests (not enforced in dev)
+api_key = "dev-only-key-change-in-production"
+# Whether to require API key for requests (false for dev)
+require_auth = false
+
+[persistence]
+# Directory for JSON data files
+data_dir = "data"
+# Whether to persist state to disk (true recommended even in dev)
+enabled = true

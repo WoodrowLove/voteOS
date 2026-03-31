@@ -1,0 +1,22 @@
+# VoteOS — Pilot Configuration
+# Use this for shadow-mode pilot deployments.
+# Auth is ENABLED. Persistence is REQUIRED.
+
+[api]
+# Bind to all interfaces for network access
+bind_address = "0.0.0.0"
+# Standard pilot port
+bind_port = 3100
+
+[security]
+# CHANGE THIS to a strong, unique key before deployment
+api_key = "CHANGE-ME-pilot-key-minimum-16-chars"
+# Auth MUST be enabled for pilot
+require_auth = true
+
+[persistence]
+# Persistent data directory — must be writable
+# For Docker: mount a volume to /data
+data_dir = "/data"
+# Persistence MUST be enabled for pilot
+enabled = true
