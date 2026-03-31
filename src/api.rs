@@ -47,6 +47,7 @@ pub struct AppState {
 pub struct ApiConfig {
     pub api_key: String,
     pub require_auth: bool,
+    pub persistence_enabled: bool,
 }
 
 // ---------------------------------------------------------------------------
@@ -132,14 +133,28 @@ pub fn build_router(state: Arc<AppState>) -> Router {
 // ---------------------------------------------------------------------------
 
 async fn health() -> impl IntoResponse {
-    Json(serde_json::json!({ "status": "ok", "system": "voteos" }))
+    Json(serde_json::json!({
+        "status": "ok",
+        "system": "voteos",
+        "version": env!("CARGO_PKG_VERSION"),
+    }))
 }
 
 async fn ready(State(state): State<Arc<AppState>>) -> impl IntoResponse {
+    // Real readiness: verify registries are accessible
     let election_count = state.election_registry.elections.count();
+    let cert_count = state.cert_registry.certifications.count();
+
     Json(serde_json::json!({
         "ready": true,
-        "elections": election_count,
+        "persistence_enabled": state.config.persistence_enabled,
+        "auth_enabled": state.config.require_auth,
+        "registries": {
+            "elections": election_count,
+            "certifications": cert_count,
+            "voters": state.voter_registry.registrations.count(),
+        },
+        "axia_integration": "not_connected",
     }))
 }
 
@@ -147,20 +162,30 @@ async fn status(State(state): State<Arc<AppState>>) -> impl IntoResponse {
     Json(serde_json::json!({
         "system": "voteos",
         "version": env!("CARGO_PKG_VERSION"),
+        "phase": "domain-complete",
         "modules": {
-            "voter_registry": true,
-            "election_management": true,
-            "ballot_operations": true,
-            "vote_recording": true,
-            "tally_engine": true,
-            "result_certification": true,
-            "governance_proposals": true,
-            "audit_oversight": true,
-            "election_operations": true,
-            "integration_export": true,
+            "voter_registry": "build_complete",
+            "election_management": "build_complete",
+            "ballot_operations": "build_complete",
+            "vote_recording": "build_complete",
+            "tally_engine": "build_complete",
+            "result_certification": "build_complete",
+            "governance_proposals": "build_complete",
+            "audit_oversight": "build_complete",
+            "election_operations": "build_complete",
+            "integration_export": "build_complete",
         },
-        "elections": state.election_registry.elections.count(),
-        "certifications": state.cert_registry.certifications.count(),
+        "runtime": {
+            "persistence": state.config.persistence_enabled,
+            "auth": state.config.require_auth,
+            "axia_live": false,
+        },
+        "stats": {
+            "elections": state.election_registry.elections.count(),
+            "certifications": state.cert_registry.certifications.count(),
+            "proposals": state.proposal_registry.proposals.count(),
+            "exports": state.export_registry.exports.count(),
+        },
     }))
 }
 

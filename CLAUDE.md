@@ -81,9 +81,9 @@ governance: vt46d-j7777-77774-qaagq-cai
 Note: IDs change on every dfx start --clean. Verify before use.
 
 ## Build state
-Current phase:         VoteOS Phase 1 COMPLETE — All modules + Adoption Layer BUILD_COMPLETE
-Last completed gate:   Wave 7 (Adoption Layer — legacy migration + shadow validation)
-Current state:         10 modules + adoption layer BUILD_COMPLETE, 173 domain tests passing, 17 ignored (empty stubs), axum HTTP API, binary target
+Current phase:         VoteOS Phase 1 COMPLETE + Runtime Hardened
+Last completed gate:   Wave 8 (AxiaSystem Integration Audit + Runtime Hardening)
+Current state:         10 modules + adoption layer BUILD_COMPLETE, 187 tests passing, 17 ignored (empty stubs), runtime hardened, axum HTTP API, binary target
 Ground truth:          docs/voteos-design/GROUND_TRUTH_STATUS.md (2026-03-30 audit)
 
 ## Module status (update as you build)
