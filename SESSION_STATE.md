@@ -2,42 +2,38 @@
 
 ## Current Phase
 
-PILOT READY — All waves complete through Wave 9
+PILOT READY + Intelligence Layer — system is observable and reportable
 
 ## Last Completed Gate
 
-Wave 9: Pilot Preparation — Dockerfile, operator runbook, quickstart, pilot scenario, deployment checklist, known limitations.
+Intelligence Extension: Operational telemetry + pilot reporting layer. SystemSnapshot and PilotReport with deterministic aggregation.
 
 ## Current State
 
 - All 10 modules BUILD_COMPLETE
 - Adoption layer BUILD_COMPLETE
+- Intelligence layer BUILD_COMPLETE
 - Runtime HARDENED
-- Pilot documentation COMPLETE
-- Deployment packaging COMPLETE
-- 187 tests passing, 0 failing, 17 ignored
-- Binary: `cargo run --release -- config/voteos.toml`
-- Docker: `docker build -t voteos . && docker run -p 3100:3100 voteos`
+- Deployment packaging COMPLETE (Dockerfile, configs, runbook)
+- Total: 194 passing, 0 failing, 17 ignored
 
-## Operator Resources
+## Intelligence Layer
 
-| Resource | Path |
-|----------|------|
-| Quickstart | docs/QUICKSTART.md |
-| Operator Runbook | docs/runbooks/VOTEOS_OPERATOR_RUNBOOK.md |
-| Deployment Checklist | docs/runbooks/DEPLOYMENT_CHECKLIST.md |
-| Pilot Scenario | docs/pilot/PILOT_SCENARIO.md |
-| Known Limitations | docs/KNOWN_LIMITATIONS.md |
-| Config (dev) | config/templates/voteos.dev.toml |
-| Config (pilot) | config/templates/voteos.pilot.toml |
-| AxiaSystem Status | docs/runtime/AXIASYSTEM_INTEGRATION_STATUS.md |
+| Endpoint | Returns |
+|----------|---------|
+| GET /api/system/insights | SystemSnapshot — election/proposal/ops/audit/export counts, runtime config |
+| GET /api/system/pilot-report | PilotReport — adoption, reconciliation, shadow validation, audit summaries |
 
-## Pilot Readiness
+Key findings auto-generated: low normalization, invalid records, ambiguous reconciliation, shadow mismatches, audit failures.
 
-| Question | Answer |
-|----------|--------|
-| Can an operator deploy this? | YES — Dockerfile + runbook + checklist |
-| Can they run a full election? | YES — quickstart demonstrates lifecycle in 5 minutes |
-| Can they verify results? | YES — audit endpoint reconstructs and compares |
-| Can they troubleshoot without code? | YES — runbook covers all common issues |
-| Is it honest about limitations? | YES — KNOWN_LIMITATIONS.md is explicit |
+## System Totals
+
+| Metric | Value |
+|--------|-------|
+| Modules | 10/10 BUILD_COMPLETE |
+| Capabilities | 100+ |
+| Tests | 194 passing |
+| API endpoints | 22+ |
+| Binary | cargo run --release -- config/voteos.toml |
+| Docker | docker build -t voteos . |
+| Operator docs | Quickstart, Runbook, Checklist, Pilot Scenario |

@@ -125,6 +125,9 @@ pub fn build_router(state: Arc<AppState>) -> Router {
         .route("/api/operations/:election_ref/resume", post(resume_election))
         .route("/api/operations/:election_ref/incident", post(flag_incident))
         .route("/api/operations/:election_ref/state", get(get_operational_state))
+        // Intelligence
+        .route("/api/system/insights", get(system_insights))
+        .route("/api/system/pilot-report", get(pilot_report))
         .with_state(state)
 }
 
@@ -620,4 +623,37 @@ async fn get_operational_state(
         }))),
         None => ApiResponse::err("No operational state found"),
     }
+}
+
+// ---------------------------------------------------------------------------
+// Intelligence endpoints (read-only, no auth required for observability)
+// ---------------------------------------------------------------------------
+
+async fn system_insights(
+    State(state): State<Arc<AppState>>,
+) -> impl IntoResponse {
+    let snapshot = voteos::intelligence::build_system_snapshot(
+        &state.election_registry,
+        &state.cert_registry,
+        &state.proposal_registry,
+        &state.audit_registry,
+        &state.ops_registry,
+        &state.export_registry,
+        state.config.persistence_enabled,
+        state.config.require_auth,
+    );
+    Json(snapshot)
+}
+
+async fn pilot_report(
+    State(state): State<Arc<AppState>>,
+) -> impl IntoResponse {
+    // Pilot report with empty adoption data — populated when pilot runs
+    let report = voteos::intelligence::build_pilot_report(
+        &[],    // No normalized voters cached at API level
+        None,   // No reconciliation cached
+        &[],    // No shadow validations cached
+        &state.audit_registry,
+    );
+    Json(report)
 }

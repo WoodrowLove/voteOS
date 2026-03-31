@@ -81,9 +81,9 @@ governance: vt46d-j7777-77774-qaagq-cai
 Note: IDs change on every dfx start --clean. Verify before use.
 
 ## Build state
-Current phase:         PILOT READY — All waves through Wave 9 complete
-Last completed gate:   Wave 9 (Pilot Preparation — deployment, runbook, quickstart)
-Current state:         10 modules + adoption layer BUILD_COMPLETE, 187 tests, Dockerfile, operator docs, pilot scenario
+Current phase:         PILOT READY + Intelligence Layer
+Last completed gate:   Intelligence Extension (operational telemetry + pilot reporting)
+Current state:         10 modules + adoption + intelligence BUILD_COMPLETE, 194 tests, Dockerfile, operator docs, pilot scenario
 Ground truth:          docs/voteos-design/GROUND_TRUTH_STATUS.md (2026-03-30 audit)
 
 ## Module status (update as you build)
