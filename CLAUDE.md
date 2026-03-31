@@ -67,7 +67,7 @@ Rust Bridge:
 VoteOS:
   build:   cargo build
   test:    cargo test
-  run:     (no binary target yet — library crate only, see NEXT_BUILD_ORDER.md Wave 6)
+  run:     cargo run -- config/voteos.toml
 
 ## Canister IDs (local replica — from CivilOS deployment, SHARED)
 Last known IDs (verify with dfx canister id <name> in ../AxiaSystem):
@@ -81,9 +81,9 @@ governance: vt46d-j7777-77774-qaagq-cai
 Note: IDs change on every dfx start --clean. Verify before use.
 
 ## Build state
-Current phase:         VoteOS Phase 1 — Waves 1-5 BUILD_COMPLETE, 9/10 modules addressed
-Last completed gate:   Wave 5 (Governance Proposals + Integration & Export)
-Current state:         9 modules BUILD_COMPLETE (100 capabilities), 137 domain tests passing, 17 ignored (empty stubs), no integration tests, no API, no binary
+Current phase:         VoteOS Phase 1 — All 10 modules BUILD_COMPLETE, Runtime OPERATIONAL
+Last completed gate:   Wave 6 (Election Operations + Runtime Boundary)
+Current state:         10 modules BUILD_COMPLETE (100+ capabilities), 150 domain tests passing, 17 ignored (empty stubs), axum HTTP API, binary target
 Ground truth:          docs/voteos-design/GROUND_TRUTH_STATUS.md (2026-03-30 audit)
 
 ## Module status (update as you build)
@@ -97,7 +97,7 @@ Ground truth:          docs/voteos-design/GROUND_TRUTH_STATUS.md (2026-03-30 aud
 | 6 | Result Certification | BUILD_COMPLETE |
 | 7 | Governance Proposals | BUILD_COMPLETE |
 | 8 | Audit & Oversight | BUILD_COMPLETE |
-| 9 | Election Operations | DESIGN_COMPLETE |
+| 9 | Election Operations | BUILD_COMPLETE |
 | 10 | Integration & Export | BUILD_COMPLETE |
 
 ## Wave execution order (corrected 2026-03-30)
@@ -107,7 +107,7 @@ Wave 3: Tally Engine + Result Certification (results) — BUILD_COMPLETE
 Wave 3.5: End-to-end domain proof (trust gate) — PASSED
 Wave 4: Audit & Oversight (trust verification — promoted to solo wave) — BUILD_COMPLETE
 Wave 5: Governance Proposals + Integration & Export (extensions) — BUILD_COMPLETE
-Wave 6: Election Operations + API + Deployment (runtime boundary)
+Wave 6: Election Operations + API + Deployment (runtime boundary) — BUILD_COMPLETE
 
 ## Architecture stance
 - AxiaSystem = source of identity, legitimacy, assurance truth
@@ -119,13 +119,13 @@ Wave 6: Election Operations + API + Deployment (runtime boundary)
 
 ## Open questions
 
-- Runtime shape: VoteOS has no binary target or HTTP API yet (Wave 6 will address)
+- AxiaSystem live integration: workflows compile but are untested against real canister
 
 ## Known blockers
 
-- No binary target — VoteOS is library-only until Wave 6
 - No AxiaSystem integration tests — requires local ICP replica
-- 7 workflow test stubs are empty bodies, not blocked tests with real logic
+- 17 workflow test stubs are empty bodies, not blocked tests with real logic
+- Only plurality voting method implemented
 
 ## Iteration protocol
 Follow docs/agent/ITERATION_HARNESS.md for the build loop.

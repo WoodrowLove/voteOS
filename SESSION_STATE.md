@@ -2,25 +2,19 @@
 
 ## Current Phase
 
-Phase 1 — Waves 1-5 BUILD_COMPLETE | All 10 modules addressed | Wave 6 (Runtime) NEXT
+Phase 1 — All 10 modules BUILD_COMPLETE | Runtime boundary OPERATIONAL
 
 ## Last Completed Gate
 
-Wave 5: Governance Proposals (Module 7) + Integration & Export (Module 10) — proposal lifecycle, outcome determination, certified result export, audit compatibility.
+Wave 6: Election Operations (Module 9) + Runtime Boundary — axum HTTP server, API endpoints, config-driven startup, operational controls.
 
 ## Current State
 
-- Module 1 (Voter Registry): 12 capabilities — BUILD_COMPLETE
-- Module 2 (Election Management): 14 capabilities — BUILD_COMPLETE
-- Module 3 (Ballot Operations): 10 capabilities — BUILD_COMPLETE
-- Module 4 (Vote Recording): 11 capabilities — BUILD_COMPLETE
-- Module 5 (Tally Engine): 9 capabilities — BUILD_COMPLETE
-- Module 6 (Result Certification): 8 capabilities — BUILD_COMPLETE
-- Module 7 (Governance Proposals): 10 capabilities — BUILD_COMPLETE
-- Module 8 (Audit & Oversight): 10 capabilities — BUILD_COMPLETE
-- Module 9 (Election Operations): 8 capabilities — DESIGN_COMPLETE
-- Module 10 (Integration & Export): 8 capabilities — BUILD_COMPLETE
-- Total: 137 passing, 0 failing, 17 ignored (empty stubs)
+- All 10 modules BUILD_COMPLETE (100+ capabilities)
+- Binary target: `cargo run -- config/voteos.toml`
+- HTTP API: axum server with 20+ endpoints
+- 150 domain tests passing, 0 failing, 17 ignored (empty stubs)
+- Runtime: config-driven, persistence-optional, API-key auth
 
 ## Module Status
 
@@ -34,31 +28,36 @@ Wave 5: Governance Proposals (Module 7) + Integration & Export (Module 10) — p
 | 6. Result Certification | BUILD_COMPLETE | 12 |
 | 7. Governance Proposals | BUILD_COMPLETE | 14 |
 | 8. Audit & Oversight | BUILD_COMPLETE | 14 |
-| 9. Election Operations | DESIGN_COMPLETE | 0 |
+| 9. Election Operations | BUILD_COMPLETE | 13 |
 | 10. Integration & Export | BUILD_COMPLETE | 8 |
 | Cross-module lifecycle | PROVEN | 15 |
 | DomainStore unit | PROVEN | 6 |
 
-## Election-Specific Proofs
+## Runtime Boundary
 
-| Proof | Status |
-|-------|--------|
-| ELIGIBILITY_PROVEN | DOMAIN_PROVEN |
-| BALLOT_INTEGRITY_PROVEN | DOMAIN_PROVEN |
-| DOUBLE_VOTE_PREVENTION_PROVEN | DOMAIN_PROVEN |
-| SECRECY_PROVEN | DOMAIN_PROVEN |
-| TALLY_DETERMINISM_PROVEN | DOMAIN_PROVEN |
-| AMBIGUITY_HANDLED_PROVEN | DOMAIN_PROVEN |
-| CERTIFICATION_CHAIN_PROVEN | DOMAIN_PROVEN |
-| END_TO_END_LIFECYCLE_PROVEN | DOMAIN_PROVEN |
-| SYSTEM_CONSISTENCY_PROVEN | DOMAIN_PROVEN |
-| AUDIT_RECONSTRUCTION_PROVEN | DOMAIN_PROVEN |
-| OBSERVER_VERIFICATION_PROVEN | DOMAIN_PROVEN |
-| TAMPER_DETECTION_PROVEN | DOMAIN_PROVEN |
-| GOVERNANCE_PROPOSAL_PROVEN | DOMAIN_PROVEN |
-| RESULT_EXPORT_PROVEN | DOMAIN_PROVEN |
-| INTEGRATION_BOUNDARY_PROVEN | DOMAIN_PROVEN |
+| Component | Status |
+|-----------|--------|
+| Binary entrypoint (main.rs) | OPERATIONAL |
+| HTTP server (axum) | OPERATIONAL |
+| Config (voteos.toml) | OPERATIONAL |
+| API key auth | OPERATIONAL |
+| Health/Ready/Status | OPERATIONAL |
+| Election lifecycle API | OPERATIONAL |
+| Tally/Certification API | OPERATIONAL |
+| Audit/Export API | OPERATIONAL |
+| Operations API | OPERATIONAL |
+| Persistence (JSON files) | OPERATIONAL |
+
+## API Endpoints
+
+Health: GET /health, /ready, /status
+Elections: POST /api/elections/create, GET /api/elections, /:id, /:id/publish, /open, /close
+Tally: POST /api/tally/:id/compute, GET /api/tally/:id
+Certification: POST /api/certify/:id
+Audit: GET /api/audit/:id, POST /api/audit/:id/verify
+Export: GET /api/export/:id
+Operations: POST /api/operations/:id/pause, /resume, /incident, GET /state
 
 ## Next Action
 
-**Wave 6: Election Operations (Module 9) + Runtime Boundary (API + Binary)**
+**Wave 7: Adoption Layer (Wrapper / Migration / Shadow Mode)** — or runtime hardening + AxiaSystem integration

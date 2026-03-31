@@ -1,0 +1,14 @@
+# VoteOS Server Configuration — Local Development
+# Copy and modify for production use.
+
+[api]
+bind_address = "127.0.0.1"
+bind_port = 3100
+
+[security]
+api_key = "dev-only-key-change-in-production"
+require_auth = false
+
+[persistence]
+data_dir = "data"
+enabled = true

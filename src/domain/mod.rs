@@ -8,5 +8,6 @@ pub mod certification;
 pub mod audit;
 pub mod proposals;
 pub mod export;
+pub mod operations;
 
 pub use store::DomainStore;
